@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { reduxForm, Field } from 'redux-form';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+
+import TextField from '../Form/TextField';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,28 +22,38 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ContactForm(props) {
+function ContactForm({ submitting, handleSubmit, onSubmit }) {
   const classes = useStyles();
 
+  const handleFormSubmit = data => {
+    if (onSubmit) onSubmit(data);
+  };
+
   return (
-    <form noValidate autoComplete='off'>
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
       <Container maxWidth='sm'>
         <h2>Contact Form</h2>
-        <TextField
+        <Field
+          name='name'
+          component={TextField}
           className={classes.mt}
           id='contact-name'
           label='Name'
           fullWidth
         />
-        <TextField
+        <Field
+          name='email'
+          component={TextField}
           type='email'
           className={classes.mt}
           id='contact-email'
           label='Email'
           fullWidth
         />
-        <TextField
+        <Field
+          name='message'
           className={classes.mt}
+          component={TextField}
           id='contact-message'
           label='Message'
           rowsMax='4'
@@ -52,6 +65,7 @@ function ContactForm(props) {
           variant='contained'
           color='primary'
           type='submit'
+          disabled={submitting}
         >
           Submit
         </Button>
@@ -60,6 +74,10 @@ function ContactForm(props) {
   );
 }
 
-ContactForm.propTypes = {};
+ContactForm.propTypes = {
+  submitting: PropTypes.bool,
+  handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func
+};
 
-export default ContactForm;
+export default reduxForm({ form: 'contactForm' })(ContactForm);
