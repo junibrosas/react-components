@@ -2,23 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
+// TODO: Add loading spinner
+
 const DraftTextEditor = React.lazy(() =>
-  import(/* webpackChunkName: 'draft-texteditor' */ './DraftTextEditor')
+  import(
+    /* webpackChunkName: 'draft-texteditor' */ '../DraftTextEditor/DraftTextEditor'
+  )
 );
-
-// todo: add loading spinner
-
-function TextEditor(props) {
-  const { helperText, error } = props;
-  return (
-    <React.Suspense fallback={<></>}>
-      <DraftTextEditor {...props} />
-      {helperText && (
-        <FormHelperText error={error}>{helperText}</FormHelperText>
-      )}
-    </React.Suspense>
-  );
-}
 
 const TextEditorShape = {
   value: PropTypes.string,
@@ -42,9 +32,18 @@ export const TextEditorField = props => {
     others.helperText = errorText;
   }
 
-  return <TextEditor {...input} {...others} />;
+  return (
+    <React.Suspense fallback={<></>}>
+      <DraftTextEditor {...input} {...others} />
+      {others.helperText && (
+        <FormHelperText error={others.error}>
+          {others.helperText}
+        </FormHelperText>
+      )}
+    </React.Suspense>
+  );
 };
 
-TextEditor.propTypes = TextEditorShape;
+TextEditorField.propTypes = TextEditorShape;
 
-export default TextEditor;
+export default TextEditorField;

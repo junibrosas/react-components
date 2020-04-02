@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
-import { stateFromMarkdown } from 'draft-js-import-markdown';
+import { markdownToDraft } from 'markdown-draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { IsJsonString } from '../utils/stringUtil';
 
@@ -28,17 +28,18 @@ function DraftTextEditor(props) {
         const state = convertFromRaw(JSON.parse(value));
         setEditorState(EditorState.createWithContent(state));
       } else {
-        const state = stateFromMarkdown(value);
+        const state = convertFromRaw(markdownToDraft(value));
         setEditorState(EditorState.createWithContent(state));
       }
     }
-  }, [value, editorState]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   const onEditorStateChange = state => {
     const stringifiedContent = JSON.stringify(
       convertToRaw(state.getCurrentContent())
     );
-    onChange(stringifiedContent);
+    if (onChange) onChange(stringifiedContent);
     setEditorState(state);
   };
 

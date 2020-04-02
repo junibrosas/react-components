@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 
 import TextField from '../Form/TextField';
+import TextEditorField from '../Form/TextEditorField';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,16 +51,18 @@ function ContactForm({ submitting, handleSubmit, onSubmit }) {
           label='Email'
           fullWidth
         />
-        <Field
-          name='message'
-          className={classes.mt}
-          component={TextField}
-          id='contact-message'
-          label='Message'
-          rowsMax='4'
-          fullWidth
-          multiline
-        />
+        <div className={classes.mt}>
+          <Field
+            name='message'
+            component={TextEditorField}
+            id='contact-message'
+            label='Message'
+            rowsMax='4'
+            fullWidth
+            multiline
+            placeholder='Start typing here...'
+          />
+        </div>
         <Button
           className={classes.mt2}
           variant='contained'
