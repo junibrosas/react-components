@@ -1,4 +1,4 @@
-# Curated Components
+# Curated List of Components
 Note: This is not a library but a collection of reusable components. The goal here is just to isolate components while I write and play around with them.
 
 TODO:
@@ -11,4 +11,4 @@ Run
 - yarn start
 
 Live Demo
-https://codesandbox.io/s/github/junibrosas/react-jest-integration
+https://codesandbox.io/s/github/junibrosas/react-components
