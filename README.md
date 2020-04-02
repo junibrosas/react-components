@@ -1,5 +1,8 @@
-# react-jest-integration
-React Jest Integration Testing
+# Curated Components
+Note: This is not a library but a collection of reusable components. The goal here is just to isolate components while I write and play around with them.
+
+TODO:
+1. Add more!
 
 Installation
 - yarn
