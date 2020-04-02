@@ -6,3 +6,6 @@ Installation
 
 Run
 - yarn start
+
+Live Demo
+https://codesandbox.io/s/github/junibrosas/react-jest-integration
