@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
 import './App.css';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import ContactForm from './ContactForm/ContactForm';
 
 // Base reducer
