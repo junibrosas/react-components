@@ -1,0 +1,3 @@
+- convert form to redux-form based form
+- submit the form
+- write tests
